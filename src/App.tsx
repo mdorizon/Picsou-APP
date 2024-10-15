@@ -1,31 +1,12 @@
 import { useEffect, useState } from "react";
-import Input from "./components/ui/Input";
-import Button from "./components/ui/Button";
 import ExpenseItem from "./components/expense/ExpenseItem";
 import { ExpenseType } from "./types/expense";
+import ExpenseForm from "./components/expense/ExpenseForm";
 
 const App = () => {
     const [expenses, setExpenses] = useState<ExpenseType[]>([]);
-    const [expenseInput, setExpenseInput] = useState<number[]>();
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if(!expenseInput) return
-        
-        const expense = {
-            amount: expenseInput,
-            category: 'Test'
-        }
-
-        setExpenses([
-            ...expenses,
-            expense
-        ]);
-    }
 
     useEffect(() => {
-        console.log('component mounted')
         fetchExpenses()
     }, []);
 
@@ -39,21 +20,11 @@ const App = () => {
         <>  
             <div>
                 {/* Formulaire de création de dépenses */}
-                <form onSubmit={handleSubmit}>
-                    <Input 
-                        placeholder="Exemple: 300€" 
-                        type='number'
-                        setValue={setExpenseInput}
-                    />
-                    <Button
-                        text="Ajouter"
-                        type="submit"
-                    />
-                </form>
+                <ExpenseForm expenses={expenses} setExpenses={setExpenses} />
             </div>
 
-            {/* Liste des dépenses */}
             <div>
+                {/* Liste des dépenses */}
                 {expenses.map((expense, index) => <ExpenseItem expense={expense} key={index} index={index} expenses={expenses} setExpenses={setExpenses} /> )}
             </div>
         </>
