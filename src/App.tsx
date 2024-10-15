@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "./components/ui/Input";
 import Button from "./components/ui/Button";
+import ExpenseItem from "./components/expense/expenseItem";
 
 const expensesListDefault = [300, 200, 40];
 
@@ -35,9 +36,7 @@ const App = () => {
 
             {/* Liste des dépenses */}
             <div>
-                {expenses.map((expense, index) => (
-                    <div key={index}>{expense}</div>
-                ))}
+                {expenses.map((expense, index) => <ExpenseItem expense={expense} key={index} index={index} expenses={expenses} setExpenses={setExpenses} /> )}
             </div>
         </>
     );

@@ -3,6 +3,7 @@ type ButtonProps = {
     text: string;
     variant?: "primary" | "secondary" | "danger";
     className?: string;
+    onClick?: () => void;
 }
 
 const buttonStyle = {
@@ -12,11 +13,12 @@ const buttonStyle = {
     danger: "bg-red-500 hover:bg-red-700",
 }
 
-const Button = ({type = "button", text, variant = "primary", className} : ButtonProps) => {
+const Button = ({type = "button", text, variant = "primary", className, onClick} : ButtonProps) => {
     return ( 
         <button 
             type={type}
             className={`${buttonStyle[variant]} ${buttonStyle.default} ${className}`}
+            onClick={onClick}
         >
             {text}
         </button>
