@@ -1,10 +1,11 @@
+import { ExpenseType } from "../../types/expense";
 import Button from "../ui/Button";
 
 type ExpenseItemProps = {
-    expense: number;
+    expense: ExpenseType;
     index: number;
-    expenses: number[];
-    setExpenses: React.Dispatch<React.SetStateAction<number[]>>;
+    expenses: ExpenseType[];
+    setExpenses: (expenses: ExpenseType[]) => void;
 }
 
 const ExpenseItem = ({expense, index, expenses, setExpenses} : ExpenseItemProps) => {
@@ -16,7 +17,7 @@ const ExpenseItem = ({expense, index, expenses, setExpenses} : ExpenseItemProps)
 
     return (
         <div key={index} className="bg-slate-100 p-4 rounded-md mb-1">
-            {expense}
+            {expense.amount}
             <Button
                 text="Delete"
                 variant="danger"
